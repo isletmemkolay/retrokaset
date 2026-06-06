@@ -234,7 +234,7 @@
 
   <div id="player" class="youtube-host" aria-hidden="true"></div>
   <script>
-    const YOUTUBE_VIDEO_ID = 'dQw4w9WgXcQ';
+    const YOUTUBE_VIDEO_ID = 'https://www.youtube.com/watch?v=1ZeiF1muZig';
     let player;
     let playerReady = false;
     let durationCache = 0;
@@ -269,7 +269,7 @@
 
     window.onYouTubeIframeAPIReady = function(){
       player = new YT.Player('player', {
-        height: '1', width: '1', videoId: YOUTUBE_VIDEO_ID,
+        height: '1', width: '1', videoId: https://www.youtube.com/watch?v=1ZeiF1muZig,
         playerVars: { autoplay: 0, controls: 0, rel: 0, playsinline: 1 },
         events: { onReady: onPlayerReady, onStateChange: onPlayerStateChange }
       });
