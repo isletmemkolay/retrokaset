@@ -9,134 +9,40 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
   <style>
-    :root {
-      --bg:#0f0d0a;
-      --surface:#18140f;
-      --surface-2:#231d16;
-      --text:#f6efe6;
-      --muted:#cdbda7;
-      --line:rgba(255,255,255,.12);
-      --accent:#d29a54;
-      --accent-2:#8f6535;
-      --radius:22px;
-      --shadow:0 24px 70px rgba(0,0,0,.35);
-    }
+    :root{--bg:#0f0d0a;--surface:#18140f;--surface-2:#231d16;--text:#f6efe6;--muted:#cdbda7;--line:rgba(255,255,255,.12);--accent:#d29a54;--accent-2:#8f6535;--radius:22px;--shadow:0 24px 70px rgba(0,0,0,.35)}
     *{box-sizing:border-box;margin:0;padding:0}
-    body{
-      min-height:100vh;
-      background:radial-gradient(circle at top, rgba(210,154,84,.18), transparent 26%),var(--bg);
-      color:var(--text);
-      font-family:'Inter',sans-serif;
-      display:grid;
-      place-items:center;
-      padding:18px;
-    }
+    body{min-height:100vh;background:radial-gradient(circle at top, rgba(210,154,84,.18), transparent 26%),var(--bg);color:var(--text);font-family:'Inter',sans-serif;display:grid;place-items:center;padding:18px}
     .app{width:min(1180px,100%);display:grid;gap:18px}
-    .stage{
-      position:relative;
-      background:#120f0c;
-      border:1px solid var(--line);
-      border-radius:28px;
-      overflow:hidden;
-      box-shadow:var(--shadow);
-      aspect-ratio:16/9;
-      isolation:isolate;
-    }
-    .scene{
-      width:100%;height:100%;object-fit:cover;display:block;user-select:none;pointer-events:none;
-    }
-    .screen{
-      position:absolute;
-      overflow:hidden;
-      background:#000;
-      box-shadow:inset 0 0 0 1.5px rgba(0,0,0,.32), 0 0 14px rgba(0,255,136,.06);
-      isolation:isolate;
-    }
-    .screen .crop{
-      position:absolute;
-      inset:-24% -24%;
-      overflow:hidden;
-      transform-origin:center;
-      filter:saturate(1.05) contrast(1.03) brightness(.98);
-    }
-    .screen iframe,
-    .screen .player-box{
-      position:absolute;
-      inset:0;
-      width:100%;
-      height:100%;
-      border:0;
-      display:block;
-      pointer-events:none;
-      transform-origin:center;
-    }
-    .screen::after{
-      content:"";
-      position:absolute;
-      inset:0;
-      background:
-        linear-gradient(180deg, rgba(255,255,255,.10), transparent 24%, transparent 76%, rgba(0,0,0,.20)),
-        repeating-linear-gradient(to bottom, rgba(255,255,255,.045) 0 2px, rgba(0,0,0,0) 2px 4px);
-      mix-blend-mode:screen;
-      opacity:.38;
-      pointer-events:none;
-    }
-    .screen::before{
-      content:"";
-      position:absolute;
-      inset:0;
-      background:radial-gradient(circle at 50% 50%, transparent 55%, rgba(0,0,0,.18) 100%);
-      pointer-events:none;
-      z-index:2;
-    }
+    .stage{position:relative;background:#120f0c;border:1px solid var(--line);border-radius:28px;overflow:hidden;box-shadow:var(--shadow);aspect-ratio:16/9;isolation:isolate}
+    .scene{width:100%;height:100%;object-fit:cover;display:block;user-select:none;pointer-events:none}
+    .screen{position:absolute;overflow:hidden;background:#000;box-shadow:inset 0 0 0 1.5px rgba(0,0,0,.32),0 0 14px rgba(0,255,136,.06);isolation:isolate}
+    .screen::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg, rgba(255,255,255,.09), transparent 22%, transparent 78%, rgba(0,0,0,.22)),repeating-linear-gradient(to bottom, rgba(255,255,255,.04) 0 2px, rgba(0,0,0,0) 2px 4px);mix-blend-mode:screen;opacity:.34;pointer-events:none;z-index:2}
+    .screen::before{content:"";position:absolute;inset:0;background:radial-gradient(circle at 50% 50%, transparent 58%, rgba(0,0,0,.16) 100%);pointer-events:none;z-index:2}
+    .viewport{position:absolute;inset:0;overflow:hidden}
+    .viewport iframe,.viewport div{position:absolute;border:0;display:block;pointer-events:none}
 
-    .tv-top-left{left:37.5%;top:14.6%;width:12.9%;height:16.3%;border-radius:16px;transform:perspective(900px) rotateX(0deg) rotateY(-2deg) rotateZ(-.4deg)}
-    .tv-top-right{left:55.5%;top:14.8%;width:12.7%;height:16.1%;border-radius:16px;transform:perspective(900px) rotateX(0deg) rotateY(2deg) rotateZ(.5deg)}
-    .tv-left{left:24.2%;top:45.5%;width:7.5%;height:16.2%;border-radius:14px;transform:perspective(900px) rotateY(-10deg) rotateZ(-.5deg)}
-    .tv-center{left:39.0%;top:36.3%;width:19.2%;height:24.2%;border-radius:18px;transform:perspective(1000px) rotateY(0deg) rotateZ(0deg)}
-    .tv-right{left:76.9%;top:45.4%;width:7.7%;height:16.4%;border-radius:14px;transform:perspective(900px) rotateY(11deg) rotateZ(.5deg)}
+    .tv-top-left{left:37.95%;top:17.05%;width:9.15%;height:13.15%;border-radius:11px;transform:perspective(900px) rotateY(-3deg) rotateZ(-.7deg)}
+    .tv-top-right{left:56.15%;top:17.15%;width:8.95%;height:12.95%;border-radius:11px;transform:perspective(900px) rotateY(3deg) rotateZ(.7deg)}
+    .tv-left{left:25.55%;top:46.35%;width:5.0%;height:11.95%;border-radius:9px;transform:perspective(900px) rotateY(-11deg) rotateZ(-.8deg)}
+    .tv-center{left:39.55%;top:37.75%;width:15.55%;height:18.7%;border-radius:13px}
+    .tv-right{left:77.85%;top:46.3%;width:5.15%;height:12.05%;border-radius:9px;transform:perspective(900px) rotateY(11deg) rotateZ(.8deg)}
 
-    .tv-top-left .crop{transform:scale(1.22)}
-    .tv-top-right .crop{transform:scale(1.22)}
-    .tv-left .crop{transform:scale(1.7) translateX(6%) translateY(1%)}
-    .tv-center .crop{transform:scale(1.12)}
-    .tv-right .crop{transform:scale(1.72) translateX(-6%) translateY(1%)}
+    .tv-top-left .viewport iframe,.tv-top-left .viewport div{left:-42%;top:-32%;width:184%;height:164%}
+    .tv-top-right .viewport iframe,.tv-top-right .viewport div{left:-42%;top:-32%;width:184%;height:164%}
+    .tv-left .viewport iframe,.tv-left .viewport div{left:-73%;top:-30%;width:246%;height:166%}
+    .tv-center .viewport iframe,.tv-center .viewport div{left:-18%;top:-10%;width:136%;height:120%}
+    .tv-right .viewport iframe,.tv-right .viewport div{left:-73%;top:-30%;width:246%;height:166%}
 
-    .controls{
-      display:flex;align-items:center;gap:12px;flex-wrap:wrap;padding:14px;
-      background:linear-gradient(180deg,var(--surface),var(--surface-2));border:1px solid var(--line);
-      border-radius:var(--radius);box-shadow:var(--shadow);
-    }
-    .btn{
-      min-width:50px;height:50px;border:1px solid var(--line);border-radius:16px;background:rgba(255,255,255,.04);
-      color:var(--text);cursor:pointer;font-size:18px;transition:transform .18s ease, background .18s ease, border-color .18s ease;
-    }
+    .controls{display:flex;align-items:center;gap:12px;flex-wrap:wrap;padding:14px;background:linear-gradient(180deg,var(--surface),var(--surface-2));border:1px solid var(--line);border-radius:var(--radius);box-shadow:var(--shadow)}
+    .btn{min-width:50px;height:50px;border:1px solid var(--line);border-radius:16px;background:rgba(255,255,255,.04);color:var(--text);cursor:pointer;font-size:18px;transition:transform .18s ease,background .18s ease,border-color .18s ease}
     .btn:hover{transform:translateY(-1px);background:rgba(255,255,255,.08)}
     .btn.primary{background:linear-gradient(180deg,var(--accent),var(--accent-2));color:#140f0a;border-color:transparent;font-weight:700}
     .range-wrap{flex:1 1 240px;min-width:180px;display:grid;gap:6px;padding-inline:6px}
     .meta{display:flex;justify-content:space-between;font-size:12px;color:var(--muted)}
     input[type="range"]{width:100%;accent-color:var(--accent);cursor:pointer}
     .mini{color:var(--muted);font-size:13px;padding-inline:4px}
-
-    @media (max-width:900px){
-      .tv-top-left{left:37.3%;top:14.6%;width:13.1%;height:16.5%}
-      .tv-top-right{left:55.4%;top:14.9%;width:12.9%;height:16.3%}
-      .tv-left{left:24.0%;top:45.5%;width:7.8%;height:16.5%}
-      .tv-center{left:38.8%;top:36.2%;width:19.5%;height:24.5%}
-      .tv-right{left:76.7%;top:45.4%;width:8.0%;height:16.7%}
-    }
-    @media (max-width:640px){
-      body{padding:10px}
-      .stage{aspect-ratio:16/10.2}
-      .tv-top-left{left:37.0%;top:14.7%;width:13.3%;height:16.6%;border-radius:12px}
-      .tv-top-right{left:55.2%;top:14.9%;width:13.0%;height:16.3%;border-radius:12px}
-      .tv-left{left:23.7%;top:45.7%;width:8.0%;height:16.6%;border-radius:11px}
-      .tv-center{left:38.5%;top:36.1%;width:19.9%;height:24.9%;border-radius:14px}
-      .tv-right{left:76.5%;top:45.6%;width:8.2%;height:16.8%;border-radius:11px}
-      .controls{padding:10px;gap:10px}
-      .btn{min-width:46px;height:46px;border-radius:14px}
-      .mini{width:100%}
-    }
+    @media (max-width:900px){.tv-top-left{left:37.9%;top:17.1%;width:9.2%;height:13.2%}.tv-top-right{left:56.1%;top:17.2%;width:9.0%;height:13.0%}.tv-left{left:25.4%;top:46.4%;width:5.1%;height:12.0%}.tv-center{left:39.5%;top:37.8%;width:15.7%;height:18.9%}.tv-right{left:77.8%;top:46.35%;width:5.2%;height:12.15%}}
+    @media (max-width:640px){body{padding:10px}.stage{aspect-ratio:16/10.2}.controls{padding:10px;gap:10px}.btn{min-width:46px;height:46px;border-radius:14px}.mini{width:100%}}
     @media (prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:.01ms !important;animation-iteration-count:1 !important;transition-duration:.01ms !important}}
   </style>
 </head>
@@ -145,11 +51,11 @@
     <section class="stage" aria-label="Retro TV sahnesi">
       <img class="scene" src="./scene.jpg" alt="Retro televizyonlardan oluşan dekor sahnesi" width="1920" height="1080" loading="eager" />
 
-      <div class="screen tv-top-left" aria-hidden="true"><div class="crop"><div class="player-box" id="clone1"></div></div></div>
-      <div class="screen tv-top-right" aria-hidden="true"><div class="crop"><div class="player-box" id="clone2"></div></div></div>
-      <div class="screen tv-left" aria-hidden="true"><div class="crop"><div class="player-box" id="clone3"></div></div></div>
-      <div class="screen tv-center" aria-label="Ana TV ekranı"><div class="crop"><div class="player-box" id="player"></div></div></div>
-      <div class="screen tv-right" aria-hidden="true"><div class="crop"><div class="player-box" id="clone4"></div></div></div>
+      <div class="screen tv-top-left"><div class="viewport"><div id="player1"></div></div></div>
+      <div class="screen tv-top-right"><div class="viewport"><div id="player2"></div></div></div>
+      <div class="screen tv-left"><div class="viewport"><div id="player3"></div></div></div>
+      <div class="screen tv-center"><div class="viewport"><div id="player4"></div></div></div>
+      <div class="screen tv-right"><div class="viewport"><div id="player5"></div></div></div>
     </section>
 
     <section class="controls" aria-label="Video kontrol paneli">
@@ -165,15 +71,19 @@
         <div class="meta"><span>Ses</span><span id="volumeLabel">70%</span></div>
         <input type="range" id="volumeBar" min="0" max="100" value="70" aria-label="Ses seviyesi" />
       </div>
-      <div class="mini">Aynı video tüm TV ekranlarında oynuyor gibi görünür. Video bitince başka videoya geçmez.</div>
+      <div class="mini">Aynı video tüm TV ekranlarında eşzamanlı görünür. Video bitince başka videoya geçmez.</div>
     </section>
   </main>
 
   <script>
     const YOUTUBE_VIDEO_ID = 'Yf3UpljAe4I';
-    let player;
-    let ready = false;
-    let timer = null;
+    const PLAYER_IDS = ['player1','player2','player3','player4','player5'];
+    const players = [];
+    let master = null;
+    let readyCount = 0;
+    let syncTimer = null;
+    let masterInitiated = false;
+
     const playBtn = document.getElementById('playBtn');
     const pauseBtn = document.getElementById('pauseBtn');
     const restartBtn = document.getElementById('restartBtn');
@@ -191,48 +101,75 @@
       return String(m).padStart(2,'0') + ':' + String(s).padStart(2,'0');
     }
 
-    function cloneMainIframe(){
-      const iframe = document.querySelector('#player iframe');
-      if (!iframe) return;
-      ['clone1','clone2','clone3','clone4'].forEach(id => {
-        const holder = document.getElementById(id);
-        holder.innerHTML = '';
-        const clone = iframe.cloneNode(true);
-        clone.removeAttribute('id');
-        clone.setAttribute('tabindex','-1');
-        clone.setAttribute('aria-hidden','true');
-        holder.appendChild(clone);
-      });
-    }
+    function allReady(){ return readyCount === PLAYER_IDS.length; }
 
     function updateUI(){
-      if (!ready) return;
-      const current = player.getCurrentTime() || 0;
-      const duration = player.getDuration() || 0;
+      if (!master || !allReady()) return;
+      const current = master.getCurrentTime() || 0;
+      const duration = master.getDuration() || 0;
       currentTimeEl.textContent = formatTime(current);
       durationEl.textContent = formatTime(duration);
       seekBar.value = duration ? Math.min(100, (current / duration) * 100) : 0;
     }
 
-    function startClock(){ stopClock(); timer = setInterval(updateUI, 400); }
-    function stopClock(){ if (timer) clearInterval(timer); timer = null; }
-    function playVideo(){ if (ready) player.playVideo(); }
-    function pauseVideo(){ if (ready) player.pauseVideo(); }
-    function restartVideo(){ if (ready) { player.seekTo(0,true); player.playVideo(); } }
+    function syncPlayers(force=false){
+      if (!master || !allReady()) return;
+      const time = master.getCurrentTime() || 0;
+      players.forEach((p, index) => {
+        if (index === 0) return;
+        const diff = Math.abs((p.getCurrentTime() || 0) - time);
+        if (force || diff > 0.35) p.seekTo(time, true);
+      });
+      updateUI();
+    }
+
+    function startSync(){
+      stopSync();
+      syncTimer = setInterval(() => syncPlayers(false), 500);
+    }
+
+    function stopSync(){
+      if (syncTimer) clearInterval(syncTimer);
+      syncTimer = null;
+    }
+
+    function playAll(){
+      if (!allReady()) return;
+      const time = master.getCurrentTime() || 0;
+      players.forEach((p, i) => { if (i !== 0) p.seekTo(time, true); });
+      players.forEach(p => p.playVideo());
+      startSync();
+    }
+
+    function pauseAll(){
+      if (!allReady()) return;
+      players.forEach(p => p.pauseVideo());
+      stopSync();
+      syncPlayers(true);
+    }
+
+    function restartAll(){
+      if (!allReady()) return;
+      players.forEach(p => p.seekTo(0, true));
+      players.forEach(p => p.playVideo());
+      startSync();
+    }
+
     function toggleMute(){
-      if (!ready) return;
-      if (player.isMuted()) { player.unMute(); muteBtn.textContent = '🔊'; }
-      else { player.mute(); muteBtn.textContent = '🔇'; }
+      if (!allReady()) return;
+      const muted = master.isMuted();
+      players.forEach(p => muted ? p.unMute() : p.mute());
+      muteBtn.textContent = muted ? '🔊' : '🔇';
     }
 
-    function loadAPI(){
-      const tag = document.createElement('script');
-      tag.src = 'https://www.youtube.com/iframe_api';
-      document.head.appendChild(tag);
+    function setVolume(v){
+      volumeLabel.textContent = v + '%';
+      if (!allReady()) return;
+      players.forEach(p => p.setVolume(Number(v)));
     }
 
-    window.onYouTubeIframeAPIReady = function(){
-      player = new YT.Player('player', {
+    function createPlayer(elId, index){
+      return new YT.Player(elId, {
         videoId: YOUTUBE_VIDEO_ID,
         playerVars: {
           autoplay: 0,
@@ -246,42 +183,60 @@
           origin: window.location.origin
         },
         events: {
-          onReady: () => {
-            ready = true;
-            player.setVolume(Number(volumeBar.value));
-            updateUI();
-            setTimeout(cloneMainIframe, 700);
+          onReady: (event) => {
+            players[index] = event.target;
+            readyCount += 1;
+            event.target.setVolume(Number(volumeBar.value));
+            if (index !== 0) event.target.mute();
+            if (index === 0) master = event.target;
+            if (allReady()) updateUI();
           },
           onStateChange: (event) => {
-            if (event.data === YT.PlayerState.PLAYING) startClock();
-            if (event.data === YT.PlayerState.PAUSED || event.data === YT.PlayerState.ENDED) {
-              stopClock();
+            if (index !== 0 || !master) return;
+            if (event.data === YT.PlayerState.PLAYING) {
+              if (!masterInitiated) masterInitiated = true;
+              startSync();
+            }
+            if (event.data === YT.PlayerState.PAUSED) {
+              stopSync();
+              players.forEach((p, i) => { if (i !== 0) p.pauseVideo(); });
+              syncPlayers(true);
               updateUI();
             }
             if (event.data === YT.PlayerState.ENDED) {
-              player.seekTo(0,true);
-              player.pauseVideo();
+              stopSync();
+              players.forEach(p => { p.seekTo(0, true); p.pauseVideo(); });
+              updateUI();
             }
           }
         }
       });
+    }
+
+    function loadAPI(){
+      const tag = document.createElement('script');
+      tag.src = 'https://www.youtube.com/iframe_api';
+      document.head.appendChild(tag);
+    }
+
+    window.onYouTubeIframeAPIReady = function(){
+      PLAYER_IDS.forEach((id, index) => createPlayer(id, index));
     };
 
-    playBtn.addEventListener('click', playVideo);
-    pauseBtn.addEventListener('click', pauseVideo);
-    restartBtn.addEventListener('click', restartVideo);
+    playBtn.addEventListener('click', playAll);
+    pauseBtn.addEventListener('click', pauseAll);
+    restartBtn.addEventListener('click', restartAll);
     muteBtn.addEventListener('click', toggleMute);
     seekBar.addEventListener('input', (e) => {
-      if (!ready) return;
-      const duration = player.getDuration() || 0;
-      player.seekTo((Number(e.target.value) / 100) * duration, true);
+      if (!allReady()) return;
+      const duration = master.getDuration() || 0;
+      const target = (Number(e.target.value) / 100) * duration;
+      players.forEach(p => p.seekTo(target, true));
       updateUI();
     });
-    volumeBar.addEventListener('input', (e) => {
-      volumeLabel.textContent = e.target.value + '%';
-      if (ready) player.setVolume(Number(e.target.value));
-    });
+    volumeBar.addEventListener('input', (e) => setVolume(e.target.value));
 
+    setInterval(updateUI, 400);
     loadAPI();
   </script>
 </body>
