@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <meta name="theme-color" content="#0a0014" />
+  <meta name="description" content="QR ile açılan retro neon kasetçalar deneyimi" />
+  <meta name="robots" content="noindex, nofollow" />
+  <title>QR Gift Cassette Player</title>
+  <link rel="stylesheet" href="assets/css/style.css" />
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='10' fill='%230a0014'/%3E%3Ccircle cx='22' cy='34' r='8' fill='none' stroke='%23ff3df0' stroke-width='3'/%3E%3Ccircle cx='42' cy='34' r='8' fill='none' stroke='%23ff3df0' stroke-width='3'/%3E%3C/svg%3E" />
+</head>
+<body>
+  <!-- BOOT / LOADING OVERLAY -->
+  <div id="boot" class="boot-overlay" aria-hidden="false">
+    <div class="boot-inner">
+      <div class="boot-logo">
+        <span class="reel reel-left"></span>
+        <span class="boot-title">CASSETTE</span>
+        <span class="reel reel-right"></span>
+      </div>
+      <div class="boot-bar"><span></span></div>
+      <p class="boot-text">Kaset hazırlanıyor…</p>
+    </div>
+  </div>
+
+  <!-- ANA PLAYER SHELL -->
+  <main id="player-shell" class="player-shell" data-theme="pink-neon" aria-hidden="true">
+    <div class="cassette-frame">
+      <header class="cassette-top">
+        <span class="brand">▶ NEON DECK</span>
+        <span class="side-label" id="side-label">A Side</span>
+      </header>
+
+      <!-- VIDEO / EKRAN -->
+      <section class="cassette-screen" id="video-screen" aria-label="Kaset ekranı">
+        <div class="screen-grid"></div>
+        <div class="screen-scan"></div>
+        <div id="player-mount" class="player-mount"></div>
+        <button id="big-play" class="big-play" type="button" aria-label="Oynat">
+          <svg viewBox="0 0 64 64" aria-hidden="true"><polygon points="22,14 50,32 22,50" fill="currentColor"/></svg>
+        </button>
+      </section>
+
+      <!-- REELS -->
+      <div class="reels" aria-hidden="true">
+        <div class="reel-big" id="reel-a"><span></span></div>
+        <div class="tape"></div>
+        <div class="reel-big" id="reel-b"><span></span></div>
+      </div>
+
+      <!-- TRACK META -->
+      <section class="track-meta" id="track-info">
+        <h1 class="track-title" id="track-title">—</h1>
+        <p class="track-sub" id="track-sub">Kart yükleniyor</p>
+      </section>
+
+      <!-- TICKER -->
+      <section class="ticker-bar" aria-label="Mesaj">
+        <div class="ticker-track" id="ticker-track">
+          <span id="ticker-text">Bu şarkı sana gelsin.</span>
+        </div>
+      </section>
+
+      <!-- CONTROLS -->
+      <section class="controls" id="controls" aria-label="Oynatma kontrolleri">
+        <button class="btn" data-action="prev" type="button" aria-label="Önceki">
+          <svg viewBox="0 0 24 24"><path d="M6 6h2v12H6zM20 6L10 12l10 6V6z" fill="currentColor"/></svg>
+        </button>
+        <button class="btn btn-play" data-action="play" type="button" aria-label="Oynat / Duraklat">
+          <svg class="ic-play" viewBox="0 0 24 24"><polygon points="7,5 19,12 7,19" fill="currentColor"/></svg>
+          <svg class="ic-pause" viewBox="0 0 24 24"><path d="M7 5h4v14H7zM13 5h4v14h-4z" fill="currentColor"/></svg>
+        </button>
+        <button class="btn" data-action="next" type="button" aria-label="Sonraki">
+          <svg viewBox="0 0 24 24"><path d="M16 6h2v12h-2zM4 6l10 6L4 18V6z" fill="currentColor"/></svg>
+        </button>
+        <button class="btn btn-small" data-action="replay" type="button" aria-label="Baştan">
+          <svg viewBox="0 0 24 24"><path d="M12 5V1L7 6l5 5V7a5 5 0 11-5 5H5a7 7 0 107-7z" fill="currentColor"/></svg>
+        </button>
+      </section>
+
+      <!-- PLAYLIST STRIP -->
+      <section class="playlist-strip" id="playlist-strip" hidden>
+        <ol id="playlist-list"></ol>
+      </section>
+
+      <footer class="cassette-bottom">
+        <span class="dot"></span>
+        <span class="model">MODEL · QR-GIFT</span>
+        <span class="dot"></span>
+      </footer>
+    </div>
+  </main>
+
+  <!-- DURUM EKRANLARI -->
+  <section id="status-screen" class="status-screen" hidden>
+    <div class="status-box">
+      <h2 id="status-title">Kart bulunamadı</h2>
+      <p id="status-text">Lütfen QR kodu tekrar okutun.</p>
+      <div class="status-art" aria-hidden="true">
+        <span class="reel reel-left"></span>
+        <span class="reel reel-right"></span>
+      </div>
+    </div>
+  </section>
+
+  <!-- SCRIPTS -->
+  <script src="assets/js/helpers.js"></script>
+  <script src="assets/js/cards-data.js"></script>
+  <script src="assets/js/router.js"></script>
+  <script src="assets/js/ui-render.js"></script>
+  <script src="assets/js/player-engine.js"></script>
+  <script src="assets/js/app.js"></script>
+</body>
+</html>

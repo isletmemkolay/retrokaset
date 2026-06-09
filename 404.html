@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Yönlendiriliyor…</title>
+  <script>
+    // GitHub Pages SPA fallback:
+    // Path tabanlı 404 isteklerini player.html'e query/hash olarak yönlendirir.
+    (function () {
+      try {
+        var loc = window.location;
+        var segments = loc.pathname.split('/').filter(Boolean);
+        // Repo adı GitHub Pages user/proj site'larda ilk segmenttir; user/organization site'da yoktur.
+        // Basit yaklaşım: pathin son segmentini kart id adayı olarak kullanmayalım,
+        // bunun yerine query/hash varsa onu koruyarak player.html'e yönlendir.
+        var base = loc.pathname.replace(/\/[^/]*$/, '/');
+        var target = base + 'player.html' + (loc.search || '') + (loc.hash || '');
+        loc.replace(target);
+      } catch (e) {
+        window.location.replace('player.html');
+      }
+    })();
+  </script>
+  <style>
+    html,body{margin:0;background:#0a0014;color:#ff3df0;font-family:system-ui,sans-serif;height:100%}
+    .wrap{display:flex;align-items:center;justify-content:center;height:100%;text-align:center;padding:24px}
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <div>
+      <h1>Kaset aranıyor…</h1>
+      <p><a style="color:#7ef9ff" href="player.html">Player'a git</a></p>
+    </div>
+  </div>
+</body>
+</html>
